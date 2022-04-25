@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <title>TODO App</title>
+        <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    </head>
+    <body>
+        
+        <div id="main-container">
+            <h1>TODO App</h1>
+            
+
+            <span id="span1">DESCRIPTION</span>
+            <span id="span2">CATEGORY</span>
+            <span id="span3">DUE DATE</span>
+            <hr>
+            <form action="/add-task" method="post">
+                
+                <input name="description" type="text" placeholder="what do you need to do?">
+                <hr style="margin-top: 20px;">
+
+                
+                <select name="category" id="category-select">
+                    <option value="">Choose a Category &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+                    <option value="personal">Personal</option>
+                    <option value="work">Work</option>
+                    <option value="school">School</option>
+                    <option value="cleaning">Cleaning</option>
+                    <option value="other">Other</option>
+                </select>
+
+                
+                <input name="date" type="date">
+
+                <hr style="margin-top: 20px;">
+
+                <button id="button1" type="submit"><i class="fa-solid fa-plus"></i>  ADD TASK</button>
+            </form>
+
+            <form action="/delete-task" method="post">
+                <div id="tasks-container">
+
+                    <!-- Rendering the tasks using ejs in the app -->
+                    <%for(let task of tasks){%>
+                        <hr>
+                        <div class="task">
+                            <input id="<%= task._id %>" type="checkbox" name="taskid" value="<%= task._id %>">
+                            <label class="taskDetails" for="<%= task._id %>"> <%= task.description %>  </label><br>
+                            <span class="taskDate"><i class="fa-solid fa-calendar-days"></i> &nbsp; <%= task.date %> </span>
+                            <div class="category-label <%= task.category %>"> <%= task.category %> </div>
+                        </div>
+                    <%}%>
+                </div>
+                <button id="button2" type="submit"><i class="fa-solid fa-trash-can"></i> DELETE TASKS</button>
+            </form>
+            
+        </div>
+
+    </body>
+</html>
